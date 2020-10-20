@@ -9,6 +9,7 @@
     **Solucion:** Se convirtieron las imágenes a un formato compatible (PNG). Se desarrolló un script que permitió esa conversión utilizando Google Colab (script ubicado en /src/HEIC2JPG_colab.py )
 
 
+
 # Posibles mejoras al algoritmo propuesto
 
 # Soporte gráfico de los resultados
