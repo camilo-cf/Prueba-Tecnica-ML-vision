@@ -3,7 +3,8 @@ Author: Camilo A. Cáceres - 2020
 MIT LICENCE
 
 Support file for transform HEIC files to JPG
-- Implemented in Google Colab due to its imposibility of use in Windows
+Implemented for Google Colab due to its imposibility 
+of use of the library pyheif in Windows
 """
 
 # Google colab install
