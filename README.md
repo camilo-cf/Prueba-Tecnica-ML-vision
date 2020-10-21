@@ -107,7 +107,6 @@ En este programa se propuso:
 #### **4. Inceptionv3 utilizada como una *Siamese Network***
 En este algoritmo se utiliza el concepto de transfer learning para comparar 2 imágenes en un espacio de características generado por la red neuronal pre-entrenada Inceptionv3, la comparación es hecha con la distancia del coseno entre las características obtenidas.
 
-# **Add Siamese Network image**
 
 El detector basado en Inceptionv3 sigue la estructura:
 
