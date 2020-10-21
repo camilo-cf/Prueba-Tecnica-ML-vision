@@ -3,7 +3,6 @@
 El objetivo de éste proyecto es mostrar diferentes técnicas y algoritmos para trabajar con diferentes imágenes y detectar objetos en ella.
 
 Organización de las carpetas:
-- data: imágenes a ser analizadas 
 - src: código fuente de una pequeña biblioteca creada para ésta prueba y sus respectivos ejemplos
     - Jupyter_notebooks: carpeta con una aproximación visual paso por paso al desarrollo del problema
 - support_images: imágenes de apoyo para el README.md
