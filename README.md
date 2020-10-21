@@ -2,6 +2,7 @@
 
 El objetivo de éste proyecto es mostrar diferentes técnicas y algoritmos para trabajar con diferentes imágenes y detectar objetos en ella.
 
+-----------------
 ## Tecnología escogida
 * **Lenguaje de programación:** El leguaaje de programación seleccionado es **Python** en su version 3.6. La razón de ésta selección es la versatilidad del lenguaje, su simplicidad  y compatibilidad con diversas librerías relacionadas al área del machine learning, deep learning y visión de máquina.
 * **Principales Librerías/Frameworks utilizados:**
@@ -10,6 +11,8 @@ El objetivo de éste proyecto es mostrar diferentes técnicas y algoritmos para 
     * **Matplotlib:** Librería de visualización de datos e imágenes.
     * **Scikitlearn:**  Utilizada ampliamente en el área del machine learning, ya que permite un uso sencillo de múltiples algoritmos.
     * **Tensorflow/ Keras:** Biblioteca enfocada a las redes neuronales.
+
+-----------------
 
 ## Algoritmos Utilizados 
 Se han propuesto diferentes algoritmos que indican diferentes formas de interacción con las imágenes entregadas. 
@@ -94,7 +97,7 @@ En este programa se propuso:
 
 ### **Técnica basada en *Deep Learning***
 
-#### **Inceptionv3 utilizada como una *Siamese Network* **
+#### **4. Inceptionv3 utilizada como una *Siamese Network***
 En este algoritmo se utiliza el concepto de transfer learning para comparar 2 imágenes en un espacio de características generado por la red neuronal pre-entrenada Inceptionv3, la comparación es hecha con la distancia del coseno entre las características obtenidas.
 
 # **Add Siamese Network image**
@@ -118,12 +121,15 @@ En este programa se propuso:
     6. Con el número de clústers encontrado, cada clúster es promediado para encontrar un valor medio por clúster (una forma de centroide del clúster) e indicar así la ubicación de cada uno de los objetos detectados.
     7. Los clústers son mostrados en la imagen de estudio, identificando el objeto de interés.
 
+-----------------
 
-## Diagramas de flujo
+## Diagrama
 
+El siguiente diagrama muestra la secuencia lógica utilizada en la implementacón de los algoritmos presentados.
 
+<p align="center"> <img src="support_images/Flowchart.png" width="350"/> </p>
 
-
+-----------------
 
 ## Problemas Encontrados y como fueron solucionados
 1. Las imagenes .HEIC (propios de dispositivos Apple - iPhone) presentaron una limitación para su uso en Windows y Linux.
@@ -145,9 +151,8 @@ En este programa se propuso:
 
     **Solución:** Uso de técnicas basadas en pocos datos como SIFT, ORB y estructuras de redes neuronales del tipo *one-shot learning*.
 
-
-
-## Posibles mejoras al algoritmo propuesto
+-----------------
+## Posibles mejoras a los algoritmos propuestos
 * Mejoras del algoritmo de clusterización para obtener mejores resultados en la detección.
 * Ajuste de hiperparámetros (constantes y métodos) de los algoritmos propuestos, ya que estas mejoras finas pueden mejorar considerablemente el desempeño del detector.
 * Uso de técnicas híbridas (uso de *ensemble methods*) para mejorar el desempeño de los algoritmos.
@@ -162,5 +167,93 @@ En este programa se propuso:
 * Modelo híbrido entre la *Siamese Neural network basada en Inceptionv3* y los modelos basados en técnicas clásicas.
 * Implementación de técnicas como YOLO, R-CNN, Fater R-CNN con una mayor base de datos.
 
-
+-----------------
 ## Soporte gráfico de los resultados
+-----------------
+
+### 1. Ejemplo simple - único ambiente
+
+Detección y conteo de **UN** objeto dado
+
+<p align="center"> <img src="support_images/Objeto.jpg" width="350"/> </p>
+
+#### **1. Scale-invariant feature transform (SIFT)**
+
+* La detección es correcta
+* Trata de contar algunas cajas escondidas
+* En 1 ocasión cuenta un ítem dos veces
+* 304 objetos detectados antes de la clusterización
+* 18 objetos detectados después de la clusterización
+
+<p align="center"> <img src="support_images/SIFT_DETECTION.jpg" width="350"/> </p>
+
+
+#### **2. Oriented FAST and Rotated BRIEF (ORB)**
+
+* Algoritmo rápido.
+* El detector detecta la marca "Colgate" confundiendo los productos
+* Presenta inconvenientes con algunas cosas en el fondo y de lugares contiguos (3 falsos positivos)
+* 76 objetos detectados antes de la clusterización
+* 24 objetos detectados después de la clusterización
+
+<p align="center"> <img src="support_images/ORB_DETECTION.jpg" width="350"/> </p>
+
+
+#### **3. ORB y SIFT (Técnica Híbrida)**
+
+* Algoritmo que combina rapidez y buena clasificación.
+* Parece robusto al ruido y otros.
+* Detección correcta de las caras del producto
+* 76 objetos detectados antes de la clusterización
+* 16 objetos detectados después de la clusterización
+
+<p align="center"> <img src="support_images/ORB_SIFT_DETECTION.jpg" width="350"/> </p>
+
+#### **4. Inceptionv3 utilizada como una *Siamese Network***
+
+* Algoritmo lento
+* Detección correcta de los objetos
+* Errores en la clusterización 
+* 18 objetos detectados antes de la clusterización
+* 13 objetos detectados después de la clusterización
+
+<p align="center"> <img src="support_images/Inceptionv3_DETECTION.jpg" width="350"/> </p>
+
+-----------------
+
+
+### 2. Ejemplos en otros ambientes
+
+Detección y conteo de **UN** objeto dado en otros ambientes y otros objetos
+
+<p align="center"> <img src="support_images/Objeto.jpg" width="350"/> </p>
+
+#### **1. Scale-invariant feature transform (SIFT)**
+
+<p align="center"> <img src="support_images/SIFT_DETECTION.jpg" width="350"/> </p>
+
+
+#### **2. Oriented FAST and Rotated BRIEF (ORB)**
+
+#### **3. ORB y SIFT (Técnica Híbrida)**
+
+#### **4. Inceptionv3 utilizada como una *Siamese Network***
+
+
+
+### 3. Multiples objetos
+
+Detección y conteo de **UN** objeto dado
+
+<p align="center"> <img src="src/Jupyter_notebooks/Objeto.jpg" width="350"/> </p>
+
+#### **1. Scale-invariant feature transform (SIFT)**
+
+<p align="center"> <img src="src/Jupyter_notebooks/SIFT_DETECTION.jpg" width="350"/> </p>
+
+
+#### **2. Oriented FAST and Rotated BRIEF (ORB)**
+
+#### **3. ORB y SIFT (Técnica Híbrida)**
+
+#### **4. Inceptionv3 utilizada como una *Siamese Network***
