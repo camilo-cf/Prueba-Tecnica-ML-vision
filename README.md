@@ -24,7 +24,8 @@ Se han utilizado 2 tipos de aproximaciones al trabajo con las imágenes, basadas
 #### **1. Scale-invariant feature transform (SIFT)**
 En este algoritmo se utiliza la técnica SIFT para extraer las características más relevantes de uma imagen patrón a detectar.
 
-# **Add SIFT image**
+<p align="center"> <img src="https://opencv-python-tutroals.readthedocs.io/en/latest/_images/homography_findobj.jpg" width="350"/> </p>
+
 
 El detector SIFT sigue la estructura:
 
@@ -53,7 +54,8 @@ En este programa se propuso:
 En este algoritmo se utiliza la técnica ORB para extraer las características más relevantes de una imagen patrón a detectar. 
 Su ventaja con respecto a SIFT es su mayor eficiencia computacional. 
 
-# **Add ORB image**
+<p align="center"> <img src="https://docs.opencv.org/3.4/orb_kp.jpg" width="350"/> </p>
+
 
 El detector ORB sigue la estructura:
 
@@ -226,34 +228,52 @@ Detección y conteo de **UN** objeto dado
 
 Detección y conteo de **UN** objeto dado en otros ambientes y otros objetos
 
-<p align="center"> <img src="support_images/Objeto.jpg" width="350"/> </p>
+<p align="center"> <img src="support_images/Objeto2.jpg" width="150"/> </p>
 
 #### **1. Scale-invariant feature transform (SIFT)**
-
-<p align="center"> <img src="support_images/SIFT_DETECTION.jpg" width="350"/> </p>
+Requirió una actualización del treshold y la clusterización
+<p align="center"> <img src="support_images/SIFT_DETECTION_2.jpg" width="350"/> </p>
 
 
 #### **2. Oriented FAST and Rotated BRIEF (ORB)**
 
+Por el tipo de objeto no funcionó, requiere mayores ajustes.
+<p align="center"> <img src="support_images/ORB_DETECTION_2.jpg" width="350"/> </p>
+
 #### **3. ORB y SIFT (Técnica Híbrida)**
+Por ser híbrido y al ORB no funcionar genera errores.
+<p align="center"> <img src="support_images/ORB_SIFT_DETECTION_2.jpg" width="350"/> </p>
 
 #### **4. Inceptionv3 utilizada como una *Siamese Network***
 
+Resultados aceptables, pero se puede mejorar si se ajusta.
+<p align="center"> <img src="support_images/Inceptionv3_DETECTION_2.jpg" width="350"/> </p>
 
+------------
+
+Detección y conteo de **UN** objeto dado en otros ambientes y otros objetos
+
+<p align="center"> <img src="support_images/Objeto3.jpg" width="150"/> </p>
+
+#### **1. Scale-invariant feature transform (SIFT)**
+Se puede mejorar ajustando el algortimo, pero los resultados son aceptables.
+<p align="center"> <img src="support_images/SIFT_DETECTION_3.jpg" width="350"/> </p>
+
+
+#### **2. Oriented FAST and Rotated BRIEF (ORB)**
+
+El algoritmo necesita un ajuste muy detallado y fino, cambiando el treshold se puede obtener un resultado aceptable, con muchos falsos negativos, que pueden ser mejorados.
+<p align="center"> <img src="support_images/ORB_DETECTION_3.jpg" width="350"/> </p>
+
+#### **3. ORB y SIFT (Técnica Híbrida)**
+Después de ajustar levemente los tresholds de los detectores se puede ver un resultado bueno que puede ser mejorado los diferentes parámetros de los detectores.
+<p align="center"> <img src="support_images/ORB_SIFT_DETECTION_3.jpg" width="350"/> </p>
+
+#### **4. Inceptionv3 utilizada como una *Siamese Network***
+Resultado razonable, puede ser mejorado modificando el treshold y mejorando el transfer learning de la red con información similar a la que se está evaluando.                                                                          
+<p align="center"> <img src="support_images/Inceptionv3_DETECTION_3.jpg" width="350"/> </p>
 
 ### 3. Multiples objetos
 
-Detección y conteo de **UN** objeto dado
-
-<p align="center"> <img src="src/Jupyter_notebooks/Objeto.jpg" width="350"/> </p>
-
-#### **1. Scale-invariant feature transform (SIFT)**
-
-<p align="center"> <img src="src/Jupyter_notebooks/SIFT_DETECTION.jpg" width="350"/> </p>
-
-
-#### **2. Oriented FAST and Rotated BRIEF (ORB)**
-
-#### **3. ORB y SIFT (Técnica Híbrida)**
-
-#### **4. Inceptionv3 utilizada como una *Siamese Network***
+En todos los casos la detección de múltiples objetos equivale a seleccionar los diferentes objetos en la foto y ejecutar los diferentes detectores.
+Es igual que en todos los casos anteriores, sólo unificando los resultados, los resultados de la detección de un objeto no afecta la detección de otro.

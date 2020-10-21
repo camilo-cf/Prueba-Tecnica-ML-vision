@@ -2,11 +2,11 @@ import numpy as np
 import cv2
 import matplotlib.pyplot as plt
 from sklearn.cluster import Birch
-#%matplotlib inline
 
-# ## Imagen Original
+from iDetection import *
 
 
+## Imagen Original
 PATH = "../data/JPEG/" 
 image = cv2.imread(PATH+'IMG_2465.jpg')
 print('Tamaño original : ', image.shape)
@@ -24,126 +24,22 @@ plt.axis("off")
 plt.imshow(cv2.cvtColor(resized_image, cv2.COLOR_BGR2RGB))
 plt.show()
 
-
-# # Selección del objeto de interés
-
-
-def rotate_image(image, angle):
-  """
-  Función rotar imagen
-
-  Args:
-  image
-  angle
-
-  Return:
-  rotated_image
-  """
-  image_center = tuple(np.array(image.shape[1::-1]) / 2)
-  rot_mat = cv2.getRotationMatrix2D(image_center, angle, 1.0)
-  result = cv2.warpAffine(image, rot_mat, image.shape[1::-1], flags=cv2.INTER_LINEAR)
-  return result
-
-
-
+# Selección del objeto de interés
 cropped = rotate_image(resized_image,0)[ int(770*scale_percent/100):int(950*scale_percent/100),
                                            int(630*scale_percent/100):int(760*scale_percent/100)]
 
-
 plt.axis("off")
 plt.imshow(cv2.cvtColor(cropped, cv2.COLOR_BGR2RGB))
-plt.show()                                
+plt.show()
+
+# Detección y conteo de los objetos de interés
+x_detect, y_detect, score, counter = explore_image_ORB(resized_image, cropped, 4)
+
+## Clusterización
+input_image, centroids = clustering(x_detect, y_detect, cropped, resized_image)
 
 
-# # Detector ORB
-
-
-def ORB_detector(new_image, image_template):
-    """
-    Detector ORB, compara la imagen de referencia y la de estudio.
-    Devuelve el número de características ORB positivas en la comparación.
-
-    Args:
-    new_image
-    image template
-
-    Return:
-    matches
-    """
-
-    image1 = cv2.cvtColor(new_image, cv2.COLOR_BGR2GRAY)
-
-    # Crea el detector ORB con 10000 keypoints y un factor piramidal 1.4
-    orb = cv2.ORB_create(10000, 1.4)
-
-    # Detecta los keypoints en la imagen original
-    (kp1, des1) = orb.detectAndCompute(image1, None)
-
-    # Detect keypoints of rotated image
-    (kp2, des2) = orb.detectAndCompute(image_template, None)
-
-    # Crea el matcher de fuerza bruta
-    bf = cv2.BFMatcher(cv2.NORM_HAMMING, crossCheck=True)
-    # Aplica el matcher
-    matches = bf.match(des1,des2)
-
-    # Organiza las correspondemcias basada en la distancia de hamming
-    matches = sorted(matches, key=lambda val: val.distance)
-    return len(matches)
-
-
-# # Detección y conteo de los objetos de interés
-
-
-image_template = cropped
-input_image = resized_image
-
-
-
-height, width = image_template.shape[:2]
-prob_width, prob_height = int(width*1.5), int(height*1.5)
-
-
-
-x_detect=[]
-y_detect=[]
-score = []
-threshold = 4
-counter = 0
-
-for y in range(0, input_image.shape[0]-height, int(min(image_template.shape[:2])/3)):
-    for x in range(0, input_image.shape[1]-width, int(min(image_template.shape[:2])/3)):
-        temp_img = input_image[y:y+height, x:x+width]
-        matches = ORB_detector(temp_img, image_template)        
-        if matches >= threshold:
-            x_detect.append(x)
-            y_detect.append(y)
-            score.append(matches)
-            counter += 1
-
-# ## Clusterización
-
-
-lista = np.array(list(zip(x_detect, y_detect)))
-clustering = Birch(threshold=min(image_template.shape[:2])*0.4 , n_clusters=None).fit(lista)
-
-
-
-centroids = []
-for each in np.unique(clustering.labels_):
-    centroids.append(lista[clustering.labels_ == each].sum(axis=0)/len(lista[clustering.labels_ == each]))
-
-
-
-for x, y in centroids:
-    x = int(x)
-    y = int(y)
-    cv2.rectangle(input_image, (x, y), (x+width, y+height), (0,255,0), 3)
-
-
-# ## Resultados
-
-
+## Resultados
 print(f'El número de objetos detectados antes de la clusterización es : ', str(counter))
 print(f'El número de objetos detectados es : ', str(len(centroids)))
 
@@ -153,6 +49,4 @@ cv2.putText(input_image,'Objetos detectados:'+str(len(centroids)),(10,100), font
 plt.imshow(input_image)
 plt.show()
 
-cv2.imwrite('ORB_DETECTION_3.jpg', input_image);
-
-
+cv2.imwrite('ORB_DETECTION_2.jpg', input_image);
