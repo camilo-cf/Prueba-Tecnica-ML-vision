@@ -129,7 +129,7 @@ En este programa se propuso:
 
 El siguiente diagrama muestra la secuencia lógica utilizada en la implementacón de los algoritmos presentados.
 
-<p align="center"> <img src="support_images/Flowchart.png" width="350"/> </p>
+<p align="center"> <img src="support_images/Flowchart.png" width="850"/> </p>
 
 -----------------
 
