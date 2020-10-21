@@ -1,6 +1,12 @@
-# Prueba Técnica - Deasarrollador Machine Learning (Visón por computador)
+# Prueba Técnica - Deasarrollador Machine Learning (Visión por computador)
 
 El objetivo de éste proyecto es mostrar diferentes técnicas y algoritmos para trabajar con diferentes imágenes y detectar objetos en ella.
+
+Organización de las carpetas:
+- data: imágenes a ser analizadas 
+- src: código fuente de una pequeña biblioteca creada para ésta prueba y sus respectivos ejemplos
+    - Jupyter_notebooks: carpeta con una aproximación visual paso por paso al desarrollo del problema
+- support_images: imágenes de apoyo para el README.md
 
 -----------------
 ## Tecnología escogida
@@ -29,10 +35,10 @@ En este algoritmo se utiliza la técnica SIFT para extraer las características 
 
 El detector SIFT sigue la estructura:
 
-    1. Obtener las imagenes de referencia y comparación
+    1. Obtener las imágenes de referencia y comparación
     2. La imagen de comparación es convertida a escala de grises
     3. Se crea el detector de objetos SIFT
-    4. Se obtienes los descriptores y puntos clave en cada una de las imagenes
+    4. Se obtienes los descriptores y puntos clave en cada una de las imágenes
     5. Se define el Fast Library for Aproximate Nearest Neighbors Matcher, el cual contiene algoritmos optimizados para una búsqueda rápida de nearest neighbors (vecinos cercanos) en bases de datos con alta dimensionalidad. Se especifica un árbol de decisión como clasificador y su número de checks (100).
     6. Se utiliza el classificador propuesto para comparar los descriptores de las figuras en estudio.
     7. Se comparan los resultados obtenidos utilizando la métrica de Lowe (Lowe rate), que compara la distancia entre los descriptores. Se almacenan los mejores resultados.
@@ -59,10 +65,10 @@ Su ventaja con respecto a SIFT es su mayor eficiencia computacional.
 
 El detector ORB sigue la estructura:
 
-    1. Obtener las imagenes de referencia y comparación
+    1. Obtener las imágenes de referencia y comparación
     2. La imagen de comparación es convertida a escala de grises
     3. Se crea el detector de objetos ORB, definiendo 10000 características a ser retenidas y su pirámide de escala (1.4) [representación multiescala de una sóla imagen].
-    4. Se obtienes los descriptores y puntos clave en cada una de las imagenes
+    4. Se obtienes los descriptores y puntos clave en cada una de las imágenes
     5. Se define el matcher de Fuerza Bruta o BFMatcher para comparar el descriptor de una característica de un conjunto y se compara con las demas características utilizando en este caso la distancia de Hamming. Los resultados son organizados de acuerdo a su desempeño (menor distancia es mejor) y se devuelve el número de características similares encontradas.
     
 En este programa se propuso:
@@ -134,7 +140,7 @@ El siguiente diagrama muestra la secuencia lógica utilizada en la implementacó
 -----------------
 
 ## Problemas Encontrados y como fueron solucionados
-1. Las imagenes .HEIC (propios de dispositivos Apple - iPhone) presentaron una limitación para su uso en Windows y Linux.
+1. Las imágenes .HEIC (propios de dispositivos Apple - iPhone) presentaron una limitación para su uso en Windows y Linux.
 
     **Solucion:** Se convirtieron las imágenes a un formato compatible (PNG). Se desarrolló un script que permitió esa conversión utilizando Google Colab (script ubicado en /src/HEIC2JPG_colab.py ).
 2. Sobreposición de múltiples áreas de detección para la identificación de un mismo objeto.
@@ -159,7 +165,7 @@ El siguiente diagrama muestra la secuencia lógica utilizada en la implementacó
 * Ajuste de hiperparámetros (constantes y métodos) de los algoritmos propuestos, ya que estas mejoras finas pueden mejorar considerablemente el desempeño del detector.
 * Uso de técnicas híbridas (uso de *ensemble methods*) para mejorar el desempeño de los algoritmos.
 * Detección de espacios vacíos en los estantes.
-* Uso de ténicas más complejas y recientes.
+* Uso de técnicas más complejas y recientes.
 * Recolección de mayores cantidad de imágenes para proponer un abordaje más moderno del problema (deep learning).
 * Identificar y almacemar la interacción de los clientes con los productos.
 * Identificar la no existencia de productos en determinada área.
@@ -273,7 +279,7 @@ Después de ajustar levemente los tresholds de los detectores se puede ver un re
 Resultado razonable, puede ser mejorado modificando el treshold y mejorando el transfer learning de la red con información similar a la que se está evaluando.                                                                          
 <p align="center"> <img src="support_images/Inceptionv3_DETECTION_3.jpg" width="350"/> </p>
 
-### 3. Multiples objetos
+### 3. Múltiples objetos
 
 En todos los casos la detección de múltiples objetos equivale a seleccionar los diferentes objetos en la foto y ejecutar los diferentes detectores.
 Es igual que en todos los casos anteriores, sólo unificando los resultados, los resultados de la detección de un objeto no afecta la detección de otro.
