@@ -1,4 +1,4 @@
-# Prueba Técnica - Deasarrollador Machine Learning (Visión por computador)
+# Prueba Técnica - Desarrollador Machine Learning (Visión por computador)
 
 El objetivo de éste proyecto es mostrar diferentes técnicas y algoritmos para trabajar con diferentes imágenes y detectar objetos en ella.
 
